@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Evita barras de rolagem desnecessárias */
+}
+
+.login-container {
+    display: flex;
+    width: 100vw;  /* Ocupa 100% da largura da tela */
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    background-color: #1a1a1a;
+}
+
+/* Lado Esquerdo - Ocupando metade da tela com o design curvado */
+.side-design {
+    flex: 1;
+    background: #7b2cbf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* Ajuste da curva para cobrir a altura total */
+    border-radius: 0 40% 40% 0; 
+    z-index: 2;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+}
+
+.logo-img {
+    width: 50%; /* Ajuste o tamanho conforme achar melhor */
+    max-width: 400px;
+}
+
+/* Lado Direito - Área do formulário */
+.login-content {
+    flex: 1;
+    background-color: #1a1a1a; /* Cor de fundo idêntica à imagem original */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centraliza o formulário horizontalmente */
+    padding: 0 10%;
+}
+
+form {
+    width: 100%;
+    max-width: 400px; /* Mantém os campos de entrada com um tamanho legível */
+}
+
+h1 {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    letter-spacing: 8px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    background: #252525; /* Um pouco mais claro que o fundo para contraste */
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #7b2cbf;
+    background: #2a2a2a;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    background-color: #7b2cbf;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #9d4edd;
+    transform: translateY(-2px);
+}
+
+.error-msg {
+    color: #ff4d4d;
+    margin-top: 20px;
+    height: 20px; /* Reserva espaço para não "pular" o layout */
+    font-size: 0.9rem;
+}

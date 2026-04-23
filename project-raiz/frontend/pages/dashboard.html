@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - InfoTech</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="../../assets/IMG/InfoTech.png" sizes="any">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../../assets/IMG/InfoTech.png" alt="InfoTech Logo" class="logo-sidebar">
+            </div>
+
+            <nav class="menu">
+                <p class="menu-label">MENU</p>
+                <ul>
+                    <li class="nav-dash active"><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li class="nav-estoque"><a href="estoque.html"><i class="fas fa-boxes"></i> Estoque</a></li>
+                    <li class="nav-controle"><a href="gestao-controle.html"><i class="fas fa-exchange-alt"></i> Gestão
+                            de Controle</a></li>
+                </ul>
+
+                <p class="menu-label">OUTROS</p>
+                <ul>
+                    <li><a href="../index.html" class="logout-link" id="btnLogout"><i class="fas fa-sign-out-alt"></i>
+                            Sair</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h2 style="color: var(--text-light); font-weight: 400; font-size: 1.5rem;">Dashboard</h2>
+                <div class="user-profile">
+                    <span id="userNameDisplay">Administrador</span>
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content-body">
+                <div class="cards-grid">
+                    <div class="card card-purple">
+                        <h3>Total de Produtos</h3>
+                        <p class="card-value" id="qnt-produtos">0</p>
+                    </div>
+                    <div class="card card-purple">
+                        <h3>Alertas de Estoque</h3>
+                        <p class="card-value" id="qnt-alertas">0</p>
+                    </div>
+                    <div class="card card-purple">
+                        <h3>Movimentações (Hoje)</h3>
+                        <p class="card-value" id="qnt-movimentacao">0</p>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="inputBuscaGeral" placeholder="Pesquisar...">
+                </div>
+
+                <div class="visual-placeholder table-scroll">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>PRODUTO</th>
+                                <th>CÓDIGO</th>
+                                <th>CATEGORIA</th>
+                                <th>QTD</th>
+                                <th>VALOR</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaProdutosDashboard">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - InfoTech</title>
+    <link rel="stylesheet" href="./frontend/styles/login.css">
+    <link rel="icon" type="image/svg+xml" href="assets/SVG/InfoTech.svg" sizes="any">
+</head>
+<body>
+    <main class="login-container">
+        <div class="side-design">
+            <img src="./assets/IMG/InfoTech.png" alt="Logo InfoTech" class="logo-img">
+        </div>
+
+        <section class="login-content">
+            <h1>LOGIN</h1>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-login">LOGIN</button>
+                <p id="error-message" class="error-msg"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="./frontend/JS/login.js"></script>
+</body>
+</html>

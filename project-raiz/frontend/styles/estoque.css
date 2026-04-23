@@ -1,0 +1,267 @@
+/* --- CONFIGURAÇÕES DE CORES (VARIÁVEIS) --- */
+:root {
+    --purple-main: #7b2cbf;
+    --purple-dark: #5a189a;
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --text-light: #f5f5f5;
+    --text-muted: #a0a0a0;
+}
+
+/* --- ESTILO DO INVENTÁRIO (HEADER) --- */
+.inventory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.inventory-header p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+.btn-add {
+    background-color: var(--purple-main);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-add:hover {
+    background-color: var(--purple-dark);
+}
+
+/* --- ESTILIZAÇÃO DA TABELA (PADRÃO DASHBOARD) --- */
+.table-container {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #333;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-light);
+}
+
+.styled-table thead tr {
+    border-bottom: 1px solid #333;
+}
+
+.styled-table th {
+    text-align: left;
+    color: var(--purple-main); /* Roxo do título conforme a imagem */
+    font-size: 0.8rem;
+    padding: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.styled-table td {
+    padding: 15px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #252525; /* Linha sutil entre produtos */
+    color: #f5f5f5;
+}
+
+/* Efeito ao passar o mouse na linha */
+.styled-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* --- BOTÕES DE AÇÃO NA TABELA --- */
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Alinha os ícones à direita */
+}
+
+.btn-edit, .btn-delete {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    color: #a0a0a0;
+}
+
+.btn-edit:hover {
+    color: var(--purple-main);
+}
+
+.btn-delete:hover {
+    color: #ff4d4d; /* Vermelho ao deletar */
+}
+
+/* Ajuste para a coluna de ações ficar alinhada no final */
+.styled-table th:last-child, 
+.styled-table td:last-child {
+    text-align: right;
+    padding-right: 25px;
+}
+
+/* --- STATUS BADGES --- */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.status-badge.active {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+/* --- MODAL STYLES --- */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #1e1e1e;
+    margin: 5% auto;
+    padding: 0;
+    width: 50%;
+    max-width: 600px;
+    border-radius: 15px;
+    border: 1px solid #444;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-modal {
+    font-size: 28px;
+    cursor: pointer;
+    color: #a0a0a0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 25px;
+}
+
+.form-group { display: flex; flex-direction: column; }
+.form-group.full-width { grid-column: span 2; }
+
+.form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: var(--purple-main);
+}
+
+.form-group input, .form-group select {
+    padding: 10px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--purple-main);
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+input[type="date"] {
+    color-scheme: dark;
+    padding: 8px;
+}
+
+.btn-save { background: var(--purple-main); color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.btn-save:hover { background: var(--purple-dark); }
+
+.btn-cancel { background: #333; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+.btn-cancel:hover { background: #444; }
+
+/* Customização específica para o Modal de Deletar */
+.modal-delete {
+    max-width: 450px;
+    border: 1px solid rgba(255, 77, 77, 0.3); /* Borda levemente avermelhada */
+}
+
+.modal-body {
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.delete-icon {
+    font-size: 3rem;
+    color: #ff4d4d;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.modal-body p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.modal-body span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Botão de Excluir Estilizado */
+.btn-confirm-delete {
+    background: #cc0000; /* Vermelho mais sóbrio */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-confirm-delete:hover {
+    background: #ff4d4d;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.4);
+}
+
+/* Ajuste no rodapé do modal de deletar */
+.modal-delete .modal-footer {
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+}
