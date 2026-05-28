@@ -36,7 +36,8 @@ model Movimentacao {
   tipo       String?
   quantidade Int?
   data_mov   DateTime? @default(now())
-  produto    Produto   @relation(fields: [produto_id], references: [id])
+
+  produto Produto @relation(fields: [produto_id], references: [id], onDelete: Cascade)
 
   @@map("movimentacoes")
 }

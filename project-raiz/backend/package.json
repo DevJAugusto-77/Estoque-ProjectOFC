@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx server.ts"
+    "dev": "npx tsx server.ts",
+    "build": "npx prisma generate --schema=prisma/schema.prisma",
+    "start": "npx tsx server.ts"
   },
   "dependencies": {
     "@prisma/adapter-neon": "latest",
@@ -18,5 +20,8 @@
     "@types/node": "latest",
     "prisma": "latest",
     "tsx": "latest"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
   }
 }

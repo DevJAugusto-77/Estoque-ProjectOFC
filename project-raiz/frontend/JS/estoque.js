@@ -1,12 +1,12 @@
 async function carregarProdutos() {
     try {
-        const response = await fetch('http://localhost:3000/api/produtos');
+        const response = await fetch(`${API_URL}/api/produtos`);
         const produtos = await response.json();
         const tbody = document.getElementById('tbodyEstoque');
 
-        if (!tbody) return; // Segurança caso o elemento não exista
+        if (!tbody) return;
 
-        tbody.innerHTML = ""; // Limpa a tabela
+        tbody.innerHTML = "";
 
         produtos.forEach(p => {
             const tr = document.createElement('tr');
@@ -37,14 +37,12 @@ async function carregarProdutos() {
 
 document.addEventListener('DOMContentLoaded', carregarProdutos);
 
-// Seletores do Modal
 const modal = document.getElementById('productModal');
-const btnAbrirModal = document.querySelector('.btn-add'); // O botão roxo lá em cima
+const btnAbrirModal = document.querySelector('.btn-add');
 const btnFecharModal = document.querySelector('.close-modal');
 const btnCancelar = document.getElementById('closeModalBtn');
 const formProduto = document.getElementById('productForm');
 
-// Mapa de prefixos por categoria
 const prefixosCategoria = {
     eletronicos: 'ELE',
     perifericos: 'PER',
@@ -54,20 +52,17 @@ const prefixosCategoria = {
     redes: 'RED'
 };
 
-// Gera prefixo a partir das 3 primeiras letras da categoria (fallback genérico)
 function getPrefixo(categoria) {
     if (prefixosCategoria[categoria]) return prefixosCategoria[categoria];
     return categoria.replace(/[^a-zA-Z]/g, '').substring(0, 3).toUpperCase();
 }
 
-// Gera o próximo código com base nos produtos existentes
 async function gerarCodigoAutomatico(categoria) {
     const prefixo = getPrefixo(categoria);
     try {
-        const response = await fetch('http://localhost:3000/api/produtos');
+        const response = await fetch(`${API_URL}/api/produtos`);
         const produtos = await response.json();
 
-        // Filtra produtos com o mesmo prefixo e pega o maior número
         const numeros = produtos
             .map(p => p.codigo)
             .filter(cod => cod && cod.startsWith(prefixo + '-'))
@@ -82,29 +77,24 @@ async function gerarCodigoAutomatico(categoria) {
     }
 }
 
-// Abrir Modal
 btnAbrirModal.onclick = async () => {
     modal.style.display = 'block';
     const hoje = new Date().toISOString().split('T')[0];
     document.getElementById('dataCadastro').value = hoje;
 
-    // Gera o código automático com base na categoria atual
     const categoria = document.getElementById('catProd').value;
     document.getElementById('codProd').value = await gerarCodigoAutomatico(categoria);
 }
 
-// Atualiza código quando a categoria mudar no modal de adicionar
 document.getElementById('catProd').addEventListener('change', async function () {
     document.getElementById('codProd').value = await gerarCodigoAutomatico(this.value);
 });
 
-// Fechar Modal
 const fechar = () => modal.style.display = 'none';
 btnFecharModal.onclick = fechar;
 btnCancelar.onclick = fechar;
 window.onclick = (event) => { if (event.target == modal) fechar(); };
 
-// ENVIAR DADOS PARA O BANCO
 formProduto.onsubmit = async (e) => {
     e.preventDefault();
 
@@ -119,7 +109,7 @@ formProduto.onsubmit = async (e) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3000/api/produtos', {
+        const response = await fetch(`${API_URL}/api/produtos`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(novoProduto)
@@ -131,7 +121,7 @@ formProduto.onsubmit = async (e) => {
             alert("Produto cadastrado com sucesso!");
             fechar();
             formProduto.reset();
-            carregarProdutos(); // Recarrega a tabela automaticamente
+            carregarProdutos();
         } else {
             alert("Erro ao cadastrar: " + result.error);
         }
@@ -140,49 +130,42 @@ formProduto.onsubmit = async (e) => {
     }
 };
 
-// --- FUNÇÃO DE DELETAR ---
 let idParaDeletar = null;
 const deleteModal = document.getElementById('deleteConfirmModal');
 
-// Função chamada pelo botão da tabela
 function deletarProduto(id) {
     idParaDeletar = id;
     deleteModal.style.display = 'block';
 }
 
-// Fechar modal de deletar
 const fecharDelete = () => deleteModal.style.display = 'none';
 document.getElementById('closeDeleteX').onclick = fecharDelete;
 document.getElementById('btnCancelDelete').onclick = fecharDelete;
 
-// Confirmar a exclusão via API
 document.getElementById('btnConfirmDelete').onclick = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/api/produtos/${idParaDeletar}`, {
+        const response = await fetch(`${API_URL}/api/produtos/${idParaDeletar}`, {
             method: 'DELETE'
         });
         const result = await response.json();
 
         if (result.success) {
             fecharDelete();
-            carregarProdutos(); // Recarrega a tabela
+            carregarProdutos();
         }
     } catch (error) {
         console.error("Erro ao deletar:", error);
     }
 };
 
-// --- LÓGICA DE EDIÇÃO ---
 const editModal = document.getElementById('editProductModal');
 const editForm = document.getElementById('editProductForm');
 let idProdutoEdicao = null;
 
-// Abrir modal e preencher dados
 async function abrirModalEdicao(id) {
     idProdutoEdicao = id;
     try {
-        // Buscamos a lista atual para pegar os dados do produto específico
-        const response = await fetch('http://localhost:3000/api/produtos');
+        const response = await fetch(`${API_URL}/api/produtos`);
         const produtos = await response.json();
         const p = produtos.find(item => item.id === id);
 
@@ -193,7 +176,6 @@ async function abrirModalEdicao(id) {
             document.getElementById('editPrecoProd').value = p.preco;
             document.getElementById('editQtdProd').value = p.quantidade;
             document.getElementById('editQtdMinima').value = p.quantidade_minima;
-            // Formata data para o input date (YYYY-MM-DD)
             const hoje = new Date().toISOString().split('T')[0];
             document.getElementById('editDataCadastro').value = hoje;
 
@@ -204,17 +186,14 @@ async function abrirModalEdicao(id) {
     }
 }
 
-// Fechar modal de edição
 const fecharEdicao = () => editModal.style.display = 'none';
 document.getElementById('closeEditX').onclick = fecharEdicao;
 document.getElementById('btnCancelEdit').onclick = fecharEdicao;
 
-// Enviar atualização
 editForm.onsubmit = async (e) => {
     e.preventDefault();
 
-    // Busca quantidade anterior
-    const response0 = await fetch('http://localhost:3000/api/produtos');
+    const response0 = await fetch(`${API_URL}/api/produtos`);
     const produtos0 = await response0.json();
     const produtoAnterior = produtos0.find(item => item.id === idProdutoEdicao);
     const qtdAnterior = produtoAnterior ? parseInt(produtoAnterior.quantidade) : 0;
@@ -233,7 +212,7 @@ editForm.onsubmit = async (e) => {
     const diferenca = qtdNova - qtdAnterior;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/produtos/${idProdutoEdicao}`, {
+        const response = await fetch(`${API_URL}/api/produtos/${idProdutoEdicao}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(produtoEditado)
@@ -242,9 +221,8 @@ editForm.onsubmit = async (e) => {
         const result = await response.json();
 
         if (result.success) {
-            // Registra movimentação automática se houver diferença
             if (diferenca !== 0) {
-                await fetch('http://localhost:3000/api/movimentacao', {
+                await fetch(`${API_URL}/api/movimentacao`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

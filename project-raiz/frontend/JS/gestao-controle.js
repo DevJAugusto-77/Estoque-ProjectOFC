@@ -4,10 +4,9 @@ const formMov = document.getElementById('formMovimentacao');
 const tabelaHistorico = document.getElementById('tabelaHistoricoMov');
 const filtroHistorico = document.getElementById('filtroHistorico');
 
-// Função para carregar os saldos e o select de produtos
 async function atualizarTelaControle() {
     try {
-        const res = await fetch('http://localhost:3000/api/controle/saldos');
+        const res = await fetch(`${API_URL}/api/controle/saldos`);
         const produtos = await res.json();
 
         tableBody.innerHTML = "";
@@ -33,10 +32,9 @@ async function atualizarTelaControle() {
     }
 }
 
-// Função unificada para carregar o histórico com filtro de período
 async function carregarHistorico(periodo = 'hoje') {
     try {
-        const res = await fetch(`http://localhost:3000/api/controle/historico?periodo=${periodo}`);
+        const res = await fetch(`${API_URL}/api/controle/historico?periodo=${periodo}`);
         const historico = await res.json();
 
         tabelaHistorico.innerHTML = "";
@@ -64,7 +62,6 @@ async function carregarHistorico(periodo = 'hoje') {
     }
 }
 
-// Evento de envio do formulário
 formMov.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -76,7 +73,7 @@ formMov.addEventListener('submit', async (e) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3000/api/movimentacao', {
+        const response = await fetch(`${API_URL}/api/movimentacao`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
@@ -88,7 +85,6 @@ formMov.addEventListener('submit', async (e) => {
             alert(result.message);
             formMov.reset();
 
-            // Atualiza tudo após o sucesso, mantendo o filtro atual
             await atualizarTelaControle();
             await carregarHistorico(filtroHistorico.value);
         } else {
@@ -99,12 +95,10 @@ formMov.addEventListener('submit', async (e) => {
     }
 });
 
-// Evento do filtro de período
 filtroHistorico.addEventListener('change', (e) => {
     carregarHistorico(e.target.value);
 });
 
-// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
     atualizarTelaControle();
     carregarHistorico(filtroHistorico.value);

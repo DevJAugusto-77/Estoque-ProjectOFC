@@ -1,6 +1,6 @@
 async function carregarEstatisticas() {
     try {
-        const response = await fetch('http://localhost:3000/api/dashboard/estatisticas');
+        const response = await fetch(`${API_URL}/api/dashboard/estatisticas`);
         const data = await response.json();
 
         document.getElementById('qnt-produtos').innerText = data.totalProdutos;
@@ -14,7 +14,7 @@ async function carregarEstatisticas() {
 
 async function carregarTabelaDashboard() {
     try {
-        const response = await fetch('http://localhost:3000/api/produtos');
+        const response = await fetch(`${API_URL}/api/produtos`);
         const produtos = await response.json();
         const tbody = document.getElementById('tabelaProdutosDashboard');
         

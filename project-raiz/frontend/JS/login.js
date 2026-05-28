@@ -1,18 +1,14 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Impede a página de recarregar
+    e.preventDefault();
 
-    // Captura os valores dos inputs do seu index.html
     const usernameInput = document.getElementById('username').value;
     const passwordInput = document.getElementById('password').value;
     const errorMessage = document.getElementById('error-message');
 
     try {
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch(`${API_URL}/api/login`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // Envia como 'usuario' e 'senha' para bater com o backend
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 usuario: usernameInput, 
                 senha: passwordInput 
@@ -22,10 +18,8 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (data.success) {
-            // Se o login for bem-sucedido, redireciona para o dashboard
             window.location.href = './frontend/pages/dashboard.html';
         } else {
-            // Exibe a mensagem de erro no parágrafo do HTML
             errorMessage.innerText = data.message;
         }
     } catch (err) {
