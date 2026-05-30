@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx server.ts",
     "build": "npx prisma generate --schema=prisma/schema.prisma",
-    "start": "npx tsx server.ts"
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@prisma/adapter-neon": "latest",
@@ -15,11 +14,7 @@
     "express": "latest"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "latest",
-    "@types/node": "latest",
-    "prisma": "latest",
-    "tsx": "latest"
+    "prisma": "latest"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"

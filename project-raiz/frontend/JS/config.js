@@ -1,5 +1,6 @@
-// ============================================================
-//  TROQUE a URL abaixo pela URL real do seu backend no Render
-//  Exemplo: 'https://infotech-backend.onrender.com'
-// ============================================================
-const API_URL = 'https://SEU-BACKEND.onrender.com'; 
+const isLocalhost = window.location.hostname === 'localhost' 
+    || window.location.hostname === '127.0.0.1';
+
+const API_URL = isLocalhost 
+    ? 'http://localhost:3000' 
+    : 'https://NOME-DO-SEU-SERVICO.onrender.com'; // cole aqui a URL real
