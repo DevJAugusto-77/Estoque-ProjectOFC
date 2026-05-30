@@ -3,4 +3,4 @@ const isLocalhost = window.location.hostname === 'localhost'
 
 const API_URL = isLocalhost 
     ? 'http://localhost:3000' 
-    : 'https://estoque-projectofc-1.onrender.com'; // cole aqui a URL real
+    : 'https://estoque-projectofc-1.onrender.com';
