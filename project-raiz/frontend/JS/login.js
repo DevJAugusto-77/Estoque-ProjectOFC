@@ -18,7 +18,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (data.success) {
-            window.location.href = './project-raiz/frontend/pages/dashboard.html';
+            window.location.href = './pages/dashboard.html';
         } else {
             errorMessage.innerText = data.message;
         }
