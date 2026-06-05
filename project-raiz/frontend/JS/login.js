@@ -1,3 +1,6 @@
+// Arquivo: login.js
+// Gerencia o formulário de login: envia credenciais para `POST /api/login`
+// e redireciona para o dashboard se o login for bem-sucedido.
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -18,6 +21,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (data.success) {
+            // Redireciona para a página do dashboard ao logar com sucesso
             window.location.href = './frontend/pages/dashboard.html';
         } else {
             errorMessage.innerText = data.message;

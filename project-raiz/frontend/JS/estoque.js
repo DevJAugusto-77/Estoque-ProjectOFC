@@ -1,3 +1,8 @@
+// Arquivo: estoque.js
+// Responsável por carregar, criar, editar e deletar produtos na interface de estoque.
+// Contém funções que interagem com a API (`/api/produtos`) e manipulam o DOM.
+
+// Função principal: busca produtos e popula a tabela do estoque
 async function carregarProdutos() {
     try {
         const response = await fetch(`${API_URL}/api/produtos`);

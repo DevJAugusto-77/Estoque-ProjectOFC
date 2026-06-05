@@ -1,8 +1,10 @@
+// Função que carrega estatísticas do dashboard (total de produtos, alertas, movimentações)
 async function carregarEstatisticas() {
     try {
         const response = await fetch(`${API_URL}/api/dashboard/estatisticas`);
         const data = await response.json();
 
+        // Atualiza elementos na tela com os valores retornados
         document.getElementById('qnt-produtos').innerText = data.totalProdutos;
         document.getElementById('qnt-alertas').innerText = data.totalAlertas;
         document.getElementById('qnt-movimentacao').innerText = data.movimentacoes;
@@ -12,6 +14,7 @@ async function carregarEstatisticas() {
     }
 }
 
+// Preenche a tabela do dashboard com os produtos e um status de acordo com quantidade
 async function carregarTabelaDashboard() {
     try {
         const response = await fetch(`${API_URL}/api/produtos`);
@@ -24,6 +27,7 @@ async function carregarTabelaDashboard() {
             let statusTexto = "";
             let statusClasse = "";
 
+            // Calcula status do produto com base na quantidade e quantidade mínima
             if (p.quantidade < p.quantidade_minima) {
                 statusTexto = "Instável";
                 statusClasse = "status-instavel";
@@ -51,11 +55,13 @@ async function carregarTabelaDashboard() {
     }
 }
 
+// Inicialização: carrega dados quando a página é carregada
 window.onload = () => {
     carregarEstatisticas();
     carregarTabelaDashboard();
 };
 
+// Filtro de busca na tabela do dashboard
 document.getElementById('inputBuscaGeral').addEventListener('input', function() {
     const termo = this.value.toLowerCase();
     const linhas = document.querySelectorAll('#tabelaProdutosDashboard tr');

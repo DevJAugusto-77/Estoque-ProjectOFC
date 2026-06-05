@@ -1,3 +1,8 @@
+// Arquivo: gestao-controle.js
+// Responsável pela tela de gestão/controle de estoques: mostra saldos,
+// popula select de produtos, registra movimentações e carrega histórico.
+
+// Elementos do DOM usados no script
 const tableBody = document.getElementById('tabelaSaldos');
 const selectProd = document.getElementById('selectProduto');
 const formMov = document.getElementById('formMovimentacao');
